@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Anki是一款非常好用的记忆软件，可以在PC端、移动端（IOS/Android）同步使用。通过翻问题卡可以帮助使用者记住答案。本文介绍了如何通过Anki软件中的WordQuery插件快速制作属于我们自己的单词卡集。简而言之，就是通过文档中的方法将excel中收集的单词批量变成有声有完美释义的单词卡 相关链接：Anki软件的官方软件链接 WordQuery插件的使用教程、中文教程 制作步骤： 安装A">
+<meta name="keywords" content="学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Anki自建单词卡">
+<meta property="og:url" content="https://benderay.github.io/2019/10/06/用Anki自建单词卡/index.html">
+<meta property="og:site_name" content="Benderay&#39;s blog">
+<meta property="og:description" content="Anki是一款非常好用的记忆软件，可以在PC端、移动端（IOS/Android）同步使用。通过翻问题卡可以帮助使用者记住答案。本文介绍了如何通过Anki软件中的WordQuery插件快速制作属于我们自己的单词卡集。简而言之，就是通过文档中的方法将excel中收集的单词批量变成有声有完美释义的单词卡 相关链接：Anki软件的官方软件链接 WordQuery插件的使用教程、中文教程 制作步骤： 安装A">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-model.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-option.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-add.jpg">
+<meta property="og:image" content="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-select.jpg">
+<meta property="og:updated_time" content="2019-10-06T12:06:20.498Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用Anki自建单词卡">
+<meta name="twitter:description" content="Anki是一款非常好用的记忆软件，可以在PC端、移动端（IOS/Android）同步使用。通过翻问题卡可以帮助使用者记住答案。本文介绍了如何通过Anki软件中的WordQuery插件快速制作属于我们自己的单词卡集。简而言之，就是通过文档中的方法将excel中收集的单词批量变成有声有完美释义的单词卡 相关链接：Anki软件的官方软件链接 WordQuery插件的使用教程、中文教程 制作步骤： 安装A">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-model.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="https://benderay.github.io/2019/10/06/用Anki自建单词卡/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>用Anki自建单词卡 | Benderay's blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4d0c292f05bd34a9183345b1cfa401d8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Benderay's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://benderay.github.io/2019/10/06/用Anki自建单词卡/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Benderay">
+      <meta itemprop="description" content="记录生活">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benderay's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">用Anki自建单词卡
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-10-06 18:06:51 / 修改时间：20:06:20" itemprop="dateCreated datePublished" datetime="2019-10-06T18:06:51+08:00">2019-10-06</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <div class="note info"><p>Anki是一款非常好用的记忆软件，可以在PC端、移动端（IOS/Android）同步使用。通过翻问题卡可以帮助使用者记住答案。本文介绍了如何通过Anki软件中的WordQuery插件快速制作属于我们自己的单词卡集。</p><p>简而言之，就是通过文档中的方法将excel中收集的单词批量变成有声有完美释义的单词卡</p></div>
+<h3 id="相关链接："><a href="#相关链接：" class="headerlink" title="相关链接："></a>相关链接：</h3><p><a href="https://apps.ankiweb.net/" target="_blank" rel="noopener">Anki软件的官方软件链接</a></p>
+<p><a href="https://github.com/finalion/WordQuery" target="_blank" rel="noopener">WordQuery插件的使用教程</a>、<a href="https://github.com/finalion/WordQuery/blob/master/README-CN.md" target="_blank" rel="noopener">中文教程</a></p>
+<h3 id="制作步骤："><a href="#制作步骤：" class="headerlink" title="制作步骤："></a>制作步骤：</h3><ol>
+<li><p>安装Anki软件：通过Anki官网下载</p>
+</li>
+<li><p>在Anki中安装插件WordQuery：</p>
+<p> 在Anki软件中点击 [工具]–&gt;[添加附件]–&gt;[获取插件]–&gt;[输入插件安装代码]</p>
+<p> WordQuery插件的安装代码：775418273</p>
+</li>
+<li><p>按照<a href="https://github.com/finalion/WordQuery/blob/master/README-CN.md" target="_blank" rel="noopener">WordQuery插件的使用中文教程</a>中的提示进行如下操作：</p>
+<p>3.1 <strong>添加词典</strong>（可选）</p>
+<ul>
+<li>推荐一个下载专业词典的网站：<a href="https://www.pdawiki.com/forum/forum-4-1.html" target="_blank" rel="noopener">MDict</a>，词典一般是.mdx格式的，推荐下载最新版的牛津高阶英汉词典。另外推荐一下查词软件欧陆词典，也可以在欧陆词典中添加自己下载的词典资源。</li>
+</ul>
+<p>3.2 <strong>选择单词卡模板</strong>（Choose Note type）</p>
+<p> 单词卡的模板可以在网上搜到，我在这里分享一个比较素净的配置。</p>
+<p> 在Anki软件中点击 [工具]–&gt;[管理笔记类型]–&gt;[卡片]，即可新建新的笔记类型（单词卡样式）。</p>
+<p> 正面模板：</p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"font-size:50px;font-family:arial black"</span>&gt;</span>&#123;&#123;单词&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">   </span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"font-size:15px; color: blue;"</span>&gt;</span></span><br><span class="line">&#123;&#123;音标&#125;&#125;</span><br><span class="line">&#123;&#123;发音&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>格式刷（卡片格式共享）</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line"><span class="attribute">font-family</span>: arial;</span><br><span class="line"><span class="attribute">font-size</span>: <span class="number">20px</span>;</span><br><span class="line"><span class="attribute">text-align</span>: center;</span><br><span class="line"><span class="attribute">color</span>: black;</span><br><span class="line"><span class="attribute">background-color</span>: white;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>背面模板</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#123;FrontSide&#125;&#125;</span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">hr</span> <span class="attr">id</span>=<span class="string">answer</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"color:purple;"</span> <span class="attr">align</span>=<span class="string">"left"</span>&gt;</span>&#123;&#123;释义&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"font-size=smaller"</span> <span class="attr">align</span>=<span class="string">"left"</span>&gt;</span>&#123;&#123;牛津&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">align</span>=<span class="string">"left"</span>&gt;</span>&#123;&#123;柯林斯&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-model.jpg" height="120px"></p>
+<p>3.3 <strong>对模板中的字段关联资源</strong></p>
+<p>WordQuery插件可以给某一笔记类型中的字段设置需要补充的资源，可以添加本地词典资源和网络词典资源。</p>
+<p><img src="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-option.jpg" height="120px"></p>
+<p>设置好之后，在Anki软件中只输入单词字段，然后点击Query选项就可以自动生成剩下的空白资源，这样就可以完美的给单词卡添加单词发音所需的媒体文件。</p>
+<p><img src="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-add.jpg" height="120px"></p>
+</li>
+<li><p>批量添加单词卡</p>
+<p>4.1 将需要制作的单词按列依次输入excel文件中。</p>
+<p>4.2 新建一个记事本文件，将excel文件中的单词粘贴到记事本(.txt)中，将该记事本文件另存为UTF-8编码的记事本(.txt)文件。</p>
+<p>4.3 在Anki中直接导入UTF-8编码的记事本文件。</p>
+<p>4.4 在Anki中浏览刚添加的单词，全部选中需要转换的单词，点击WordQuery中的Query Selected进行转换。</p>
+<p><img src="https://raw.githubusercontent.com/Benderay/Benderay.github.io/master/uploads/anki/anki-select.jpg" height="120px"></p>
+</li>
+</ol>
+<h3 id="Anki使用的注意事项"><a href="#Anki使用的注意事项" class="headerlink" title="Anki使用的注意事项"></a>Anki使用的注意事项</h3><p>不喜欢Anki同步功能的人，在PC端做好单词卡以后通过Anki的导出功能导出.akpg文件到手机的时候，没有选同时导出媒体文件就导致在手机上学习的时候没有单词发音。</p>
+<p>喜欢Anki同步功能的人，背完一套单词卡删掉换另一套的时候会发现同步的过程需要超长时间，有可能是删掉这套单词卡的时候单词卡中的发音等媒体文件在云端没有删除干净。点击 [工具]–&gt;[检查媒体]就可以检查是不是有没有关联单词的媒体文件没有删掉，然后选择删掉就好了。</p>
+<p>Anki的同步功能很好用，使用同步功能可以在网页/手机客户端/电脑客户端随时学习单词。直接打开<a href="https://ankiweb.net/decks/" target="_blank" rel="noopener">Anki的网页端</a>就可以随时学习同步学习进度了。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Study/" rel="tag"># 学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/04/西藏旅行/" rel="next" title="西藏旅行">
+                <i class="fa fa-chevron-left"></i> 西藏旅行
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/03/23/Value Iteration Policy Iteration/" rel="prev" title="Value Iteration Policy Iteration">
+                Value Iteration Policy Iteration <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Benderay" />
+            
+              <p class="site-author-name" itemprop="name">Benderay</p>
+              <p class="site-description motion-element" itemprop="description">记录生活</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/1908589131" target="_blank" title="微博"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关链接："><span class="nav-number">1.</span> <span class="nav-text">相关链接：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#制作步骤："><span class="nav-number">2.</span> <span class="nav-text">制作步骤：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Anki使用的注意事项"><span class="nav-number">3.</span> <span class="nav-text">Anki使用的注意事项</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Benderay</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

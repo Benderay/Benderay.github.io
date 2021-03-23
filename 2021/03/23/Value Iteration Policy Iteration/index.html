@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.5.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.5.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.5.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.5.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.5.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="There are two main scheme in the iterative adaptive dynamic programming, which are value iteration and policy iteration. Especially in addressing the optimal control problems of nonlinear discrete-tim">
+<meta name="keywords" content="学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Value Iteration Policy Iteration">
+<meta property="og:url" content="https://benderay.github.io/2021/03/23/Value Iteration Policy Iteration/index.html">
+<meta property="og:site_name" content="Benderay&#39;s blog">
+<meta property="og:description" content="There are two main scheme in the iterative adaptive dynamic programming, which are value iteration and policy iteration. Especially in addressing the optimal control problems of nonlinear discrete-tim">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2021-03-23T13:18:21.990Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Value Iteration Policy Iteration">
+<meta name="twitter:description" content="There are two main scheme in the iterative adaptive dynamic programming, which are value iteration and policy iteration. Especially in addressing the optimal control problems of nonlinear discrete-tim">
+
+
+
+
+
+
+  <link rel="canonical" href="https://benderay.github.io/2021/03/23/Value Iteration Policy Iteration/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Value Iteration Policy Iteration | Benderay's blog</title>
+  
+
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?4d0c292f05bd34a9183345b1cfa401d8";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Benderay's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://benderay.github.io/2021/03/23/Value Iteration Policy Iteration/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Benderay">
+      <meta itemprop="description" content="记录生活">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Benderay's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Value Iteration Policy Iteration
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2021-03-23 21:11:40 / 修改时间：21:18:21" itemprop="dateCreated datePublished" datetime="2021-03-23T21:11:40+08:00">2021-03-23</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Study/" itemprop="url" rel="index"><span itemprop="name">学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>There are two main scheme in the iterative adaptive dynamic programming, which are value iteration and policy iteration. Especially in addressing the optimal control problems of nonlinear discrete-time systems, there are fundamental algorithms that promotes the practical implementation of the adaptive dynamic programming. So, here, this blog article try to sketch the outline of the iterative adaptive dynamic programming that utilized in the general nonlinear discrete-time system.</p>
+<h2 id="Derive-the-optimal-control-law"><a href="#Derive-the-optimal-control-law" class="headerlink" title="Derive the optimal control law"></a>Derive the optimal control law</h2><p>Considering the non-affine nonlinear discrete-time as follows:</p>
+<p>$x_{k+1}=F\left(x_k,u_k\right)\quad k=0,1,2,\dots$,</p>
+<p>where $x_k$ denote the system state, $u_k$ denote the control input and $F(\cdot)$ be the system dynamic function. Beside, the system state $x_k=0$ is an equilibrium state under the control $u_k=0$. For optimal control problem, consider the following performance index: </p>
+<p>$J(x_{0})=\sum\limits_{l=0}^{\infty}{U(x_l,u_l)}$, </p>
+<p>where $U(x,u)=x^{\mathsf{T}}Qx+u^{\mathsf{T}}Ru$ is the utility function, $Q$ and $R$ are symmetric positive definite matrices. Thus, $U(x_k,u_k)\geq 0$ for $\forall x_k,u_k\neq 0$. The performance index, also known as the cost function, represents the exception of the total cost in the future. Therefore, the minor cost function indicates the better performance. Additionally, the cost function also named as ‘value’ function, for it is obtained by the approximation of the neural networks. Similarly, the control law $u_k=u(x_k)$ is approximated by neural networks, and its mapping relation is denoted as ‘policy’. If you are careful enough, you would noticed that the upcoming iterative algorithm will be based on the iteration of the ‘value’ function and the control ‘policy’, which are both are both derived from neural networks. Then, the optimal control problem is aims to design the optimal control $u^{\ast}(x)$ that minimize the value function. It is noted as:</p>
+<p>$u^{\ast}(x)=\arg \min\limits_{u} J(x)$,</p>
+<p>where the $J(x)$ is composed of all system states that driven by the policy $u(x)$ from now on. Based on the definition of the performance index, the value function can be described recursively as</p>
+<p>$J(x_k)=U(x_k,u_k)+J(x_{k+1})$.</p>
+<p>Therefore, according to the Bellman optimality principle<a href="#lewis"><sup>1,</sup></a><a href="#bertsekas"><sup>2</sup></a>, the optimal value function satisfies the following discrete-time Hamilton-Jacobi-Bellman function:</p>
+<p>$J^{\ast}(x_k)=\min\limits_{u(x)}{ U(x_k,u_k)+J^{\ast}(x_{k+1}) }$.</p>
+<p>Then, the optimal control is given by</p>
+<p>$u^{\ast}(x_k)=\arg\min\limits_{u(x)}{ U(x_k,u_k)+J^{\ast}(x_{k+1}) }$. Besides, the iterative version of the ‘value’ and ‘policy’ are written as $J^{i}(x_k)$ and $u^i(x_k)$, in which the index $i$ increasing from zero to infinite.</p>
+<h2 id="Policy-Iteration"><a href="#Policy-Iteration" class="headerlink" title="Policy Iteration"></a>Policy Iteration</h2><p>The admissible control law is crucial to the policy iteration, for the developed control scheme not only stabilize the system state, but also make the performance index finite. Here introduce the definition of the admissible control: A control law $u(x_k)$ is defined to be admissible with respect to the cost function on the set $\mathbb{R}_x$ of $x$, if $u(x)$ is continuous on $\mathbb{R}_x$, $u(0)=0$, $u(x)$ stabilize the system on $\mathbb{R}_x$, and $\forall x_0\in \mathbb{R}_x$, $J(x_0)$ is finite.</p>
+<p>Policy iteration can be divided into two part, policy evaluation and policy improvement. let $u^0(x_k)$ be an arbitrary admissible control policy, practically initialized by neural networks. Constructed by the admissible control policy $u^0(x_k)$, the value function $J^0(x_k)$ is obtained via solving the equation of </p>
+<p>$J^0(x_k)=U(x_k,u(x_k))+J^0(x_{k+1})$.</p>
+<p>Actually, this procedure, named as policy evaluation, aim to get the solution of the neural networks’ parameters that approximate the $J(\cdot)$. Then, through the policy improvement procedure, the control policy is improved during the iteration. It can be shown as </p>
+<p>$u^1(x_k)=\arg\min\limits_{u_k}{U(x_k,u_k)+J^0(x_{k+1})}$.</p>
+<p>To conclude, the policy iteration can be described as follows:</p>
+<ul>
+<li><p><strong>Step 1.</strong> Initialize the admissible control policy $u^0(x_k)$. </p>
+</li>
+<li><p><strong>Step 2. (Policy evaluation)</strong> Get the solution of the equation $J^i(x_k)=U(x_k,u^i(x_k))+J^i(x_{k+1})$.</p>
+</li>
+<li><strong>Step 3. (Policy improvement)</strong> Improve the control policy $u^{i+1}(x_k)=\arg\min\limits_{u_k}{U(x_k,u_k)+J^i(x_{k+1})}$.</li>
+<li><strong>Step 4.</strong> If $|J^{i+1}(x_k)-J^{i}(x_k)|\leq \alpha$, stop the iteration, otherwise, go back to step 1 and let $i=i+1$.</li>
+</ul>
+<p>If the dynamic of the system is accessible, $x_{k+1}$ can be calculated as $x_{k+1}=F(x_k,u_k)$ when $u_k$ is changed. Then the policy evaluation can be reformed as $J^i(x_k)=U(x_k,u^i(x_k))+J^i(F(x_{k},u^i_{k}))$, and this equation can be built based on the knowledge of $x_k$. Moreover, thanks to the accessible system dynamic, the rewritten of the utility function is reasonable after the control policy is changed, the policy improvement procedure can also be reformed.</p>
+<p>If the system state $x_{k+1}$ can only be observed rather than acquire by calculation, the transaction of ${x_k,u_k,x_{k+1}}$ is fixed when the iteration index $i$ increase. One can not figure out the situation after the control policy $u^i(\cdot)$ changed, ignorance is all one have. Further study is needed.</p>
+<h2 id="Value-Iteration"><a href="#Value-Iteration" class="headerlink" title="Value Iteration"></a>Value Iteration</h2><p>The admissible control policy is undesired in the value iteration, whereas the value function is initialized as $J^0(x_k)=0$ at the start. Then solve for $u^0(x_k)$ as follows:</p>
+<p>$u^0(x_k)=\arg\min\limits_{u(x)}{U(x_k,u_k)+J^0(x_{k+1})}$.</p>
+<p>Then, the value function is get as </p>
+<p>$J^1(x_k)=U(x_k,u^0_k)+J^0(F(x_k,u^0(x_k)))$.</p>
+<p>To conclude:</p>
+<ul>
+<li><strong>Step 1.</strong> Initialize the value function $J^0(x_k)=0$.</li>
+<li><strong>Step 2. (Policy improvement)</strong> $u^{i+1}(x_k)=\arg\min\limits_{u_k}{U(x_k,u_k)+J^i(x_{k+1})}$</li>
+<li><strong>Step 3. (Policy evaluation)</strong> $J^i(x_k)=U(x_k,u^i(x_k))+J^i(x_{k+1})$</li>
+<li><strong>Step 4.</strong> If $|J^{i+1}(x_k)-J^{i}(x_k)|\leq \alpha$, stop the iteration, otherwise, go back to step 1 and let $i=i+1$.</li>
+</ul>
+<p><div id="lewis"></div><br>[1] <a href="">F. L. Lewis, D. Vrabie, and V. L. Syrmos, <em>Optimal Control</em>. Hoboken, NJ, USA: Wiley, 2013.</a></p>
+<p><div id="bertsekas"></div><br>[2] <a href="">D. P. Bertsekas, <em>Dynamic Programming and Optimal Control</em>. Belmont, MA, USA: Athena Sci., 2005.</a></p>
+<p><div id="liu"></div><br>[3] <a href="">D. Liu and Q. Wei, “Policy iteration adaptive dynamic programming algorithm for discrete-time nonlinear systems,” <em>IEEE Transactions on Neural Networks and Learning Systems</em>, vol. 25, no. 3, pp. 621–634, 2013.</a></p>
+<p><div id="tamimi"></div><br>[4] <a href="">A. Al-Tamimi, F. L. Lewis, and M. Abu-Khalaf, “Discrete-time nonlinear HJB solution using approximate dynamic programming: Convergence proof,” <em>IEEE Transactions on Systems, Man, and Cybernetics, Part B Cybernetics</em>, vol. 38, no. 4, pp. 943–949, 2008.</a></p>
+<p><div id="luobiao"></div><br>[5] <a href="">B. Luo, Y. Yang, H. N. Wu and et al, “Balancing value iteration and policy iteration for discrete-time control,” <em>IEEE Transactions on Systems, Man, and Cybernetics: Systems</em>, vol. 50, no. 11, pp.3938-3958, 2019.</a></p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Study/" rel="tag"># 学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/10/06/用Anki自建单词卡/" rel="next" title="用Anki自建单词卡">
+                <i class="fa fa-chevron-left"></i> 用Anki自建单词卡
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/avatar.jpg"
+                alt="Benderay" />
+            
+              <p class="site-author-name" itemprop="name">Benderay</p>
+              <p class="site-description motion-element" itemprop="description">记录生活</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/1908589131" target="_blank" title="微博"><i class="fa fa-fw fa-weibo"></i>微博</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Derive-the-optimal-control-law"><span class="nav-number">1.</span> <span class="nav-text">Derive the optimal control law</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Policy-Iteration"><span class="nav-number">2.</span> <span class="nav-text">Policy Iteration</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Value-Iteration"><span class="nav-number">3.</span> <span class="nav-text">Value Iteration</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright"> &copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Benderay</span>
+
+  
+
+  
+</div>
+
+
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动 v3.7.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a class="theme-link" target="_blank" href="https://theme-next.org">NexT.Pisces</a> v6.5.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+	
+    
+
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.5.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.5.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.5.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.5.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.5.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.5.0"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      },
+      TeX: {equationNumbers: { autoNumber: "AMS" }}
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+<script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+    
+  
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
