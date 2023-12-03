@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Posts on Benderay&#39;s Blog</title>
-    <link>/posts.html</link>
+    <link>https://benderay.github.io/posts.html</link>
     <description>Recent content in Posts on Benderay&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Apr 2021 00:00:00 +0800</lastBuildDate><atom:link href="/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Apr 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://benderay.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>酒精计划</title>
-      <link>/posts/drunk.html</link>
+      <link>https://benderay.github.io/posts/drunk.html</link>
       <pubDate>Fri, 30 Apr 2021 00:00:00 +0800</pubDate>
       
-      <guid>/posts/drunk.html</guid>
+      <guid>https://benderay.github.io/posts/drunk.html</guid>
       <description>“什么是青春？是梦。 什么是爱情？是梦的内容。” 4个中年高中男老师，在经历了人到中年的沉闷与不顺之后，生活开始不如意。于是他们借研究酒精对人体</description>
     </item>
     
     <item>
       <title>西藏之旅</title>
-      <link>/posts/triptotibet.html</link>
+      <link>https://benderay.github.io/posts/triptotibet.html</link>
       <pubDate>Fri, 04 Oct 2019 00:00:00 +0800</pubDate>
       
-      <guid>/posts/triptotibet.html</guid>
+      <guid>https://benderay.github.io/posts/triptotibet.html</guid>
       <description>高反的预防 西藏海拔高，空气含氧量低干燥是让人身体不舒服甚至引发高原反应的原因。血液含氧量低，耗氧高的人容易高反。据我自己的感觉，休息不能缓解</description>
     </item>
     
     <item>
       <title>臆想中做一次“生与死”的选择</title>
-      <link>/posts/eva_dieorlive.html</link>
+      <link>https://benderay.github.io/posts/eva_dieorlive.html</link>
       <pubDate>Tue, 02 Apr 2019 00:00:00 +0800</pubDate>
       
-      <guid>/posts/eva_dieorlive.html</guid>
+      <guid>https://benderay.github.io/posts/eva_dieorlive.html</guid>
       <description>臆想中做一次“生与死”的选择 推荐一部动画作品《新世纪福音战士》(Neon Genesis Evangelion), 是一部轰动一时的1995年的日本科幻作品. 推荐观看顺序是TV版的</description>
     </item>
     

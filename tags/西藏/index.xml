@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>西藏 on Benderay&#39;s Blog</title>
-    <link>/tags/%E8%A5%BF%E8%97%8F.html</link>
+    <link>https://benderay.github.io/tags/%E8%A5%BF%E8%97%8F.html</link>
     <description>Recent content in 西藏 on Benderay&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 04 Oct 2019 00:00:00 +0800</lastBuildDate><atom:link href="/tags/%E8%A5%BF%E8%97%8F/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 04 Oct 2019 00:00:00 +0800</lastBuildDate><atom:link href="https://benderay.github.io/tags/%E8%A5%BF%E8%97%8F/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>西藏之旅</title>
-      <link>/posts/triptotibet.html</link>
+      <link>https://benderay.github.io/posts/triptotibet.html</link>
       <pubDate>Fri, 04 Oct 2019 00:00:00 +0800</pubDate>
       
-      <guid>/posts/triptotibet.html</guid>
+      <guid>https://benderay.github.io/posts/triptotibet.html</guid>
       <description>高反的预防 西藏海拔高，空气含氧量低干燥是让人身体不舒服甚至引发高原反应的原因。血液含氧量低，耗氧高的人容易高反。据我自己的感觉，休息不能缓解</description>
     </item>
     

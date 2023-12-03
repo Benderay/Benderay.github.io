@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>电影 on Benderay&#39;s Blog</title>
-    <link>/categories/%E7%94%B5%E5%BD%B1.html</link>
+    <link>https://benderay.github.io/categories/%E7%94%B5%E5%BD%B1.html</link>
     <description>Recent content in 电影 on Benderay&#39;s Blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
-    <lastBuildDate>Fri, 30 Apr 2021 00:00:00 +0800</lastBuildDate><atom:link href="/categories/%E7%94%B5%E5%BD%B1/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Fri, 30 Apr 2021 00:00:00 +0800</lastBuildDate><atom:link href="https://benderay.github.io/categories/%E7%94%B5%E5%BD%B1/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>酒精计划</title>
-      <link>/posts/drunk.html</link>
+      <link>https://benderay.github.io/posts/drunk.html</link>
       <pubDate>Fri, 30 Apr 2021 00:00:00 +0800</pubDate>
       
-      <guid>/posts/drunk.html</guid>
+      <guid>https://benderay.github.io/posts/drunk.html</guid>
       <description>“什么是青春？是梦。 什么是爱情？是梦的内容。” 4个中年高中男老师，在经历了人到中年的沉闷与不顺之后，生活开始不如意。于是他们借研究酒精对人体</description>
     </item>
     
